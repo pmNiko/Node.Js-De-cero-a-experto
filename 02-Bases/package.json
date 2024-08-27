@@ -1,0 +1,26 @@
+{
+  "name": "02-bases",
+  "version": "0.0.1",
+  "description": "Bases sobre los fundamentos del desarrollo en Node + Express",
+  "main": "app.js",
+  "repository": "https://github.com/pmNiko/Node.Js-De-cero-a-experto.git",
+  "author": "nikoDev <martin.paneblanco@smandes.gob.ar> (https://github.com/pmNiko)",
+  "license": "MIT",
+  "private": false,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "express",
+    "javascript"
+  ],
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "get-age": "^1.0.1",
+    "uuid": "^10.0.0"
+  }
+}
