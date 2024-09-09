@@ -1,7 +1,7 @@
 {
-  "name": "02-bases",
+  "name": "03-logger-ts",
   "version": "0.0.1",
-  "description": "Bases sobre los fundamentos del desarrollo en Node + Express",
+  "description": "Desarrollo en Node + Express",
   "main": "app.js",
   "repository": "https://github.com/pmNiko/Node.Js-De-cero-a-experto.git",
   "author": "nikoDev <martin.paneblanco@smandes.gob.ar> (https://github.com/pmNiko)",
@@ -19,8 +19,6 @@
     "nodemon": "^3.1.4"
   },
   "dependencies": {
-    "axios": "^1.7.5",
-    "get-age": "^1.0.1",
-    "uuid": "^10.0.0"
+    "winston": "^3.14.2"
   }
 }

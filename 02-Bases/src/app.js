@@ -1,4 +1,41 @@
 
+// const getPokemonById = require('./js-fundation/09-Async-Await')
+const getPokemonById = require('./js-fundation/10-fetch-adapter')
+
+
+// const asyncFn = async() =>{
+//     const res = await getPokemonById(1000);
+//     console.table({res})    
+// }
+
+// asyncFn()
+
+
+// getPokemonById(200).then(console.table)
+
+getPokemonById(30)
+    .then(({name}) => console.table({name}))
+    .catch(error => console.table({error: error.message}))
+    .finally(console.log('Finished!'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** ---------------------------------------------------------------- */
+
+
 /** Patron factory adapter */
 // const {getUUID, getAge} = require('./plugins')
 // const {buildMakePerson} = require('./js-fundation/07-applied-factory')
