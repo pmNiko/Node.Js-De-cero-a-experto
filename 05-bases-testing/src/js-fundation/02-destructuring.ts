@@ -1,7 +1,7 @@
-const superheroes = ['Batman', 'SpiderMan', 'Superman', 'Thor'];
+export const characters = ['Batman', 'SpiderMan', 'Superman', 'Thor'];
 
 
-export const [, , hero] = superheroes;
+const [, , hero] = characters;
 
 
 // module.exports = {

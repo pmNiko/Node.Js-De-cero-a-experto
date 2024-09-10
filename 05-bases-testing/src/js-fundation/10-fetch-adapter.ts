@@ -3,14 +3,16 @@
 import { httpClientPlugin } from "../plugins";
 
 
-const getPokemonById = async (id: number) => {
-    const resp = await httpClientPlugin.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    if (!resp) {
-        throw new Error('Pokemon ID ' + id + ' not found')
-    }
+export const getPokemonById = async (id: number) => {
+    try {
+        const resp = await httpClientPlugin.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 
-    return await resp;
+        if (!resp) throw new Error(`Pokemon ID ${id} not found`)
+
+        return resp;
+    } catch (error) {
+        throw error
+    }
 }
 
 
-module.exports = getPokemonById

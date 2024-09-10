@@ -54,3 +54,6 @@ testEnvironment: "jest-environment-node",
 "test:watch": "jest --watch",
 "test:coverage": "jest --coverage",
 ```
+
+
+[Recurso](https://bobbyhadz.com/blog/typescript-exclude-test-files-from-compilation)
