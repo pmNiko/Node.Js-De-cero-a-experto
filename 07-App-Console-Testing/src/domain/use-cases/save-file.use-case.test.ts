@@ -7,21 +7,25 @@ describe('Test on save-file.use-case.ts', () => {
     const fileContent = 'This is a test file content';
     const defaultDestination = 'outputs';
     const defaultFileName = 'table';
-    const saveFile = new SaveFile();
+
 
     afterEach(removeDir)
 
     test('should be instance of SaveFile', () => {
+        const saveFile = new SaveFile();
+
         expect(saveFile).toBeInstanceOf(SaveFile);
     })
 
     test('should be return true if save is successfully', () => {
+        const saveFile = new SaveFile();
         const result = saveFile.execute({ fileContent });
 
         expect(result).toBeTruthy()
     })
 
     test('should be save on custom destination', () => {
+        const saveFile = new SaveFile();
         const customDestination = 'custm-dir'
         saveFile.execute({ fileContent, fileDestination: customDestination });
 
@@ -33,6 +37,7 @@ describe('Test on save-file.use-case.ts', () => {
     })
 
     test('should be save on custom fileName', () => {
+        const saveFile = new SaveFile();
         const customFileName = 'custm-file-name'
         saveFile.execute({ fileContent, fileName: customFileName });
 
@@ -42,6 +47,7 @@ describe('Test on save-file.use-case.ts', () => {
     })
 
     test('should save file with default values', () => {
+        const saveFile = new SaveFile();
         saveFile.execute({ fileContent });
 
         const fileDestinationExists = fileExists(defaultDestination);
@@ -52,6 +58,7 @@ describe('Test on save-file.use-case.ts', () => {
     })
 
     test('should return false if directory could not be created', () => {
+        const saveFile = new SaveFile();
         const mkdirSpy = jest.spyOn(fs, 'mkdirSync')
             .mockImplementation(() => { throw new Error('Directory could not be created') })
         const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
@@ -65,6 +72,7 @@ describe('Test on save-file.use-case.ts', () => {
     })
 
     test('should return false if file could not be created', () => {
+        const saveFile = new SaveFile();
         const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync')
             .mockImplementation(() => { throw new Error('File could not be created') })
         const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
