@@ -16,12 +16,14 @@ export class CreateTable implements CreatgeTableUseCase {
     ) { }
 
     execute({ base, limit = 10 }: CreateTableOptions) {
-        let outputmessage = `------ Tabla del ${base} -------\n\n`;
-        for (let i = 0; i < limit; i++) {
-            outputmessage += `${base} x ${i} = ${base + i}\n`;
+        const output = [];
+
+        for (let i = 1; i <= limit; i++) {
+            const res = base * i
+            output.push(`${base} x ${i} = ${res}`);
         }
 
-        return outputmessage;
+        return output.join('\n');
     }
 
 }
