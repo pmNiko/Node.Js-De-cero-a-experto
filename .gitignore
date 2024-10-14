@@ -9,3 +9,5 @@ coverage/
 dist/
 
 outputs/
+
+.env

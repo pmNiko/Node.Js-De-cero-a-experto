@@ -14,3 +14,13 @@
 
 
 [recurso](https://gist.github.com/Klerith/3ba17e86dc4fabd8301a59699b9ffc0b)
+
+
+
+###### Definiciones
+
+    - Entitites:    es la definición del flujo de información
+    
+    - datasources:  contendrá los origenes de datos 
+
+    - repository:   forma de llamada al darasource
