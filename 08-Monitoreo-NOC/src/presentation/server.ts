@@ -4,9 +4,11 @@ import { LogRepositoryImpl } from "../infraestructure/repositories/log.repositor
 import { CronService } from "./cron/cron-service";
 
 
-const fileSystemLogRepository = new LogRepositoryImpl(
-    new FileSystemDatasource()
-)
+const fsDatasource = new FileSystemDatasource()
+
+const fsLogRepository = new LogRepositoryImpl(fsDatasource)
+
+const service = new CheckService(fsLogRepository);
 
 
 export class Server {
@@ -16,15 +18,7 @@ export class Server {
 
         const j = CronService.createJob(
             '*/5 * * * * *',
-            () => {
-                const url = 'http://google.com';
-
-                new CheckService(
-                    fileSystemLogRepository
-                    // , () => console.log(`Checking ${url} - services ok!`),
-                    // (error) => console.log(error)
-                ).execute(url)
-            }
+            () => service.execute('http://google.com')
         );
 
 
@@ -32,3 +26,8 @@ export class Server {
 }
 
 
+// new CheckService(
+//     fileSystemLogRepository
+//     // , () => console.log(`Checking ${url} - services ok!`),
+//     // (error) => console.log(error)
+// ).execute(url)
