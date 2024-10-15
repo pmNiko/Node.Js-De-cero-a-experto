@@ -22,7 +22,7 @@
 <br/>
 
 
-![Arquitectura en Capas](/img/RP.png)
+![Arquitectura en Capas](./img/RP.png)
 
 # Repository Pattern
 
@@ -89,7 +89,7 @@ Este enfoque fomenta un código más modular, mantenible y fácil de extender.
 
 ## Diagrama de Arquitectura
 
-![Arquitectura en Capas](/img/Arch.png)
+![Arquitectura en Capas](./img/Arch.png)
 
 ## Descripción de las Capas
 
