@@ -36,7 +36,7 @@ export class CheckService implements CheckServiceuseCase {
             this.successCallback && this.successCallback();
             return true;
         } catch (error) {
-            const errorMessage = `${error} to check service ${url}`;
+            const errorMessage = `${url} is not ok. ${error}`;
             const log = new LogEntity({
                 message: errorMessage,
                 level: LogSeverityLevel.high,

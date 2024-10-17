@@ -21,3 +21,13 @@ en nuestra aplicación de monitoreo, puntualmente veremos:
      
     * Caso de uso nuevo, para grabar en múltiples destinos simultáneamente
 
+[Documentación](https://mongoosejs.com/)
+
+
+- Secuencia de escalado
+
+ * instalamos y configuramos la dependencia de Mongo DB
+
+ * Creamos el Schema y Model
+
+ * Definimos en "infraestructure" un datasource que implemente la interfaz de "domain/datasource"

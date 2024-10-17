@@ -1,22 +1,30 @@
+import { LogSeverityLevel } from "../domain/entities/log.entity";
 import { CheckService } from "../domain/use-cases/checks/check-service";
 import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
 import { FileSystemDatasource } from "../infraestructure/datasources/file-system.datasource";
+import { MongoLogDatasource } from "../infraestructure/datasources/mongo-log.datasource";
 import { LogRepositoryImpl } from "../infraestructure/repositories/log.repository.impl";
 import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email.service";
 
 
 const fsDatasource = new FileSystemDatasource()
+const mongooseDatasource = new MongoLogDatasource()
 
-const fsLogRepository = new LogRepositoryImpl(fsDatasource)
+const logRepository = new LogRepositoryImpl(
+    fsDatasource
+    // mongooseDatasource
+)
 
-const service = new CheckService(fsLogRepository);
+const service = new CheckService(logRepository);
 
 const emailService = new EmailService();
 
+const url = "https://googlecualquiercosa.com";
+
 export class Server {
 
-    public static start() {
+    public static async start() {
         console.log('Server started...');
 
         // ?? Aca se hace el envio de email a travez de un caso de uso
@@ -32,10 +40,16 @@ export class Server {
         // ]);
 
 
+
+        const logs = await logRepository.getLogs(LogSeverityLevel.medium)
+
+        console.log(logs)
+
+
         // new CheckService(
-        //     fileSystemLogRepository
-        //     // , () => console.log(`Checking ${url} - services ok!`),
-        //     // (error) => console.log(error)
+        //     logRepository
+        //     , () => console.log(`Checking ${url} - services ok!`),
+        //     (error) => console.log(error)
         // ).execute(url)
 
         // const emailService = new EmailService();
