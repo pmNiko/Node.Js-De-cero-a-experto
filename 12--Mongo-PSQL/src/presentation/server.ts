@@ -1,8 +1,10 @@
 import { LogSeverityLevel } from "../domain/entities/log.entity";
 import { CheckService } from "../domain/use-cases/checks/check-service";
+import { CheckServiceMultiple } from "../domain/use-cases/checks/check-service-multiple";
 import { SendEmailLogs } from "../domain/use-cases/email/send-email-logs";
 import { FileSystemDatasource } from "../infraestructure/datasources/file-system.datasource";
 import { MongoLogDatasource } from "../infraestructure/datasources/mongo-log.datasource";
+import { PostgresDatasource } from "../infraestructure/datasources/postgres-log.datasource";
 import { LogRepositoryImpl } from "../infraestructure/repositories/log.repository.impl";
 import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email.service";
@@ -10,17 +12,27 @@ import { EmailService } from "./email/email.service";
 
 const fsDatasource = new FileSystemDatasource()
 const mongooseDatasource = new MongoLogDatasource()
+const psqlDatasource = new PostgresDatasource()
 
-const logRepository = new LogRepositoryImpl(
-    fsDatasource
-    // mongooseDatasource
-)
+// const logRepository = new LogRepositoryImpl(
+// fsDatasource
+// mongooseDatasource
+// psqlDatasource
+// )
 
-const service = new CheckService(logRepository);
+// const service = new CheckService(logRepository);
 
-const emailService = new EmailService();
+// const emailService = new EmailService();
 
-const url = "https://googlecualquiercosa.com";
+const url = "https://googlesss.com";
+
+
+const fsLogRepository = new LogRepositoryImpl(fsDatasource)
+const mongoLogRepository = new LogRepositoryImpl(mongooseDatasource)
+const psqlLogRepository = new LogRepositoryImpl(psqlDatasource)
+
+const logRepository = [fsLogRepository, mongoLogRepository, psqlLogRepository]
+
 
 export class Server {
 
@@ -41,16 +53,21 @@ export class Server {
 
 
 
-        const logs = await logRepository.getLogs(LogSeverityLevel.medium)
+        // const logs = await logRepository.getLogs(LogSeverityLevel.high)
 
-        console.log(logs)
+        // console.log(logs)
 
 
-        // new CheckService(
-        //     logRepository
-        //     , () => console.log(`Checking ${url} - services ok!`),
-        //     (error) => console.log(error)
-        // ).execute(url)
+        // CronService.createJob(
+        //     '*/5 * * * * *',
+        //     () => {
+        //         new CheckServiceMultiple(
+        //             logRepository,
+        //             () => console.log(`Checking ${url} - services ok!`),
+        //             (error) => console.log(error)
+        //         ).execute(url)
+        //     }
+        // )
 
         // const emailService = new EmailService();
         // emailService.sendEmail({

@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { envs } from "./config/plugins/env.plugins";
 import { LogModel, MongoDatabase } from "./data/mongo";
 import { Server } from "./presentation/server";
@@ -19,7 +20,27 @@ async function main() {
     });
 
 
+    // const prisma = new PrismaClient();
+
+    // const newLog = await prisma.logModel.create({
+    //     data: {
+    //         level: 'HIGH',
+    //         message: 'Test message',
+    //         origin: 'App.ts'
+    //     }
+    // })
     
+    // console.log(newLog)
+
+    // const logs = await prisma.logModel.findMany({
+    //     where: {
+    //         level: 'MEDIUM'
+    //     }
+    // });
+
+    // console.log(logs)
+
+
     Server.start();
 }
 
