@@ -12,5 +12,5 @@ outputs/
 
 .env
 
-mongo/
-postgres/
+mongo-db/
+postgres-db/
