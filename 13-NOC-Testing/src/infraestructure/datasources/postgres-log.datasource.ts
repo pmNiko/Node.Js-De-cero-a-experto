@@ -21,7 +21,7 @@ export class PostgresDatasource implements LogDatasource {
             }
 
         });
-        console.log(newLog)
+        console.log(`Postgres log created: ${newLog.id}`)
     }
 
 

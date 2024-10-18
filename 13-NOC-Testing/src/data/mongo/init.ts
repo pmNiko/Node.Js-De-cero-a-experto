@@ -11,17 +11,13 @@ export class MongoDatabase {
         const { mongoUrl, dbName } = options;
 
         try {
-
             await mongoose.connect(mongoUrl, {
                 dbName
             });
-
-            console.log('Mongo database connection established.')
+            // console.log('Mongo database connection established.')
+            return true;
         } catch (error) {
-            console.log('Mongo database connection error')
             throw error;
         }
-
-        return true
     }
 }

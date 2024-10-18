@@ -11,6 +11,10 @@ dist/
 outputs/
 
 .env
+.env.test
 
 mongo-db/
 postgres-db/
+
+test-mongo-db/
+test-postgres-db/
