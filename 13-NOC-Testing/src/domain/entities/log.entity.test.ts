@@ -17,7 +17,7 @@ describe("LogEntity", () => {
     expect(log.createdAt).toBeInstanceOf(Date);
   });
 
-  test("should create a LogEntity instance from json", () => {
+  test("should create a LogEntity instance fromJson", () => {
     const json = `{"message":"https://googlesss.com is not ok. TypeError: fetch failed","level":"high","origin":"check-service.ts","createdAt":"2024-10-18T12:28:21.489Z"}`;
 
     const log = LogEntity.fromJson(json);
@@ -31,7 +31,7 @@ describe("LogEntity", () => {
     expect(log.createdAt).toBeInstanceOf(Date);
   });
 
-  test("should create a LogEntity instance from object", () => {
+  test("should create a LogEntity instance fromObject", () => {
     const log = LogEntity.fromObject(dataObj);
 
     expect(log).toBeInstanceOf(LogEntity);

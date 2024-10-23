@@ -1,10 +1,17 @@
 import mongoose from "mongoose";
 import { envs } from "../../config/plugins/env.plugins";
-import { MongoDatabase } from "../../data/mongo";
+import { LogModel, MongoDatabase } from "../../data/mongo";
 import { MongoLogDatasource } from "./mongo-log.datasource";
 import { LogEntity, LogSeverityLevel } from "../../domain/entities/log.entity";
 
 describe("Test on MongoLogDatasource", () => {
+  const logDatasource = new MongoLogDatasource();
+  const log = new LogEntity({
+    level: LogSeverityLevel.medium,
+    message: "test message",
+    origin: "mongo-log.datasource.test.ts",
+  });
+
   beforeAll(
     async () =>
       await MongoDatabase.connect({
@@ -13,24 +20,26 @@ describe("Test on MongoLogDatasource", () => {
       })
   );
 
+  afterEach(async () => await LogModel.deleteMany());
+
   afterAll(() => mongoose.connection.close());
 
   test("should create a log", async () => {
-    const logDatasource = new MongoLogDatasource();
     const logSpy = jest.spyOn(console, "log");
-
-    const log = new LogEntity({
-      level: LogSeverityLevel.medium,
-      message: "test message",
-      origin: "mongo-log.datasource.test.ts",
-    });
-
     await logDatasource.saveLog(log);
 
     expect(logSpy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledWith(
-      "Mongo log created: ",
-      expect.any(String)
+      expect.stringContaining("Mongo log created:")
     );
+  });
+
+  test("should get logs", async () => {
+    await logDatasource.saveLog(log);
+
+    const logs = await logDatasource.getLogs(LogSeverityLevel.medium);
+
+    expect(logs).toHaveLength(1);
+    expect(logs[0].level).toBe(LogSeverityLevel.medium);
   });
 });
