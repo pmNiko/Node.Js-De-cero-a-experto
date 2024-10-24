@@ -1,5 +1,5 @@
 {
-  "name": "RestWev",
+  "name": "wev-server",
   "version": "1.0.0",
   "main": "index.js",
   "author": "nikoDev <martin.paneblanco@smandes.gob.ar> (https://github.com/pmNiko)",
