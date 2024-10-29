@@ -41,7 +41,6 @@ export class TodoController {
 
   public updateTodo = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    // const { text, completedAt } = req.body;
     const [error, updatedTodoDTO] = UpdateTodoDTO.create({ ...req.body, id });
 
     if (error) {
@@ -52,23 +51,12 @@ export class TodoController {
     try {
       const updatedTodo = await prisma.todo.update({
         where: { id: updatedTodoDTO!.id },
-        data: updatedTodoDTO!,
+        data: updatedTodoDTO!.values,
       });
       res.status(200).json(updatedTodo);
     } catch (error: any) {
       res.status(404).json({ message: error.message.split("\n").at(-1) });
     }
-
-    // try {
-    //   const updatedTodo = await prisma.todo.update({
-    //     where: { id },
-    //     data: { text, completedAt: completedAt ? new Date(completedAt) : null },
-    //   });
-
-    //   res.status(200).json(updatedTodo);
-    // } catch (error: any) {
-    //   res.status(404).json({ message: error.message.split("\n").at(-1) });
-    // }
   };
 
   public deleteTodo = async (req: Request, res: Response) => {
