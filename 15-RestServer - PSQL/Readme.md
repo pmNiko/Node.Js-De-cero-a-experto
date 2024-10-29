@@ -16,6 +16,7 @@
         ```sh
             yarn dev
         ```        
+    * El build de producción corre la migraciones de la BD
 
 
 [source](https://developer.themoviedb.org/reference/account-details)
