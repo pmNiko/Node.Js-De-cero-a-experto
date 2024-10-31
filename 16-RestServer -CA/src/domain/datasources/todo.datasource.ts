@@ -6,6 +6,8 @@ export abstract class TodoDatasource {
   //todo: paginación
   abstract getAll(): Promise<TodoEntity[]>;
 
+  abstract findById(id: number): Promise<TodoEntity>;
+
   abstract updateTodoById(dto: UpdateTodoDTO): Promise<TodoEntity>;
 
   abstract deleteTodoById(id: number): Promise<TodoEntity>;
