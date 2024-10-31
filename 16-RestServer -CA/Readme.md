@@ -127,3 +127,5 @@ Componentes:
 - **Datasource**: Componente que maneja la persistencia de los datos.
 - **Repository**: Intermediario entre el dominio y la infraestructura, que gestiona el acceso a los datos.
 - **Domain**: La parte central de la lógica de negocio de la aplicación.
+
+[fuente](https://expressjs.com/en/advanced/best-practice-performance.html)
