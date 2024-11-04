@@ -14,3 +14,6 @@ export const requestPOST = () => request(app).post(BASE_PATH);
 
 export const requestPUT = (todoId: string | number) =>
   request(app).put(BASE_PATH + "/" + todoId);
+
+export const requestDELETE = (todoId: string | number) =>
+  request(app).delete(BASE_PATH + "/" + todoId);

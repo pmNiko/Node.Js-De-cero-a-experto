@@ -15,3 +15,15 @@
 
 - Sólo vamos a probar aquí, lo que no hemos evaluado antes,
   por lo que la sección no es tan extensa.
+
+<br/>
+
+---
+
+###### Ejecución del proyecto
+
+    1. npx prisma init --datasource-provider postgresql
+    2. npx prisma generate
+    3. sudo chmod 755 -R  postgres-db/
+    4. npx prisma migrate dev --name init
+    5. yarn test:watch
