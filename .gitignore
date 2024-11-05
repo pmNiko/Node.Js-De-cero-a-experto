@@ -20,3 +20,10 @@ postgres-db/
 
 test-mongo-db/
 test-postgres-db/
+
+
+dist/
+
+build/
+
+coverage/
