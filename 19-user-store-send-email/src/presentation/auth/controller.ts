@@ -39,7 +39,11 @@ export class AuthController {
   };
 
   validateEmail = (req: Request, res: Response) => {
-    throw new Error("Not implemented!");
-    return;
+    const { token } = req.params;
+
+    this.authServices
+      .validateEmail(token)
+      .then(() => res.json("Email validated"))
+      .catch((err) => this.handlerError(err, res));
   };
 }

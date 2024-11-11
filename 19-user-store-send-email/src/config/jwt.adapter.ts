@@ -20,6 +20,12 @@ export class JwtAdapter {
   };
 
   public static validateToken = (token: string) => {
-    return "";
+    return new Promise((resolve) => {
+      jwt.verify(token, JWT_SEED, (err, decoded) => {
+        if (err) return resolve(null);
+
+        resolve(decoded);
+      });
+    });
   };
 }
