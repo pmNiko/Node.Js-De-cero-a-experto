@@ -1,0 +1,45 @@
+import { Request, Response } from "express";
+import { CustomError, RegisterUserDto } from "../../domain";
+import { AuthService } from "../services/auth.service";
+import { LoginUserDto } from "../../domain/dtos";
+
+export class AuthController {
+  constructor(public readonly authServices: AuthService) {}
+
+  private handlerError = (error: unknown, res: Response) => {
+    if (error instanceof CustomError) {
+      return res.status(error.statusCode).json({ error: error.message });
+    }
+
+    console.log(`${error}`);
+
+    return res.status(500).json({ error: "Internal Server Error" });
+  };
+
+  register = (req: Request, res: Response) => {
+    const [error, registerDTO] = RegisterUserDto.create(req.body);
+
+    if (error) return res.status(400).json(error);
+
+    this.authServices
+      .registerUser(registerDTO!)
+      .then((data) => res.json(data))
+      .catch((err) => this.handlerError(err, res));
+  };
+
+  login = (req: Request, res: Response) => {
+    const [error, loginDTO] = LoginUserDto.create(req.body);
+
+    if (error) return res.status(400).json(error);
+
+    this.authServices
+      .loginUser(loginDTO!)
+      .then((data) => res.json(data))
+      .catch((err) => this.handlerError(err, res));
+  };
+
+  validateEmail = (req: Request, res: Response) => {
+    throw new Error("Not implemented!");
+    return;
+  };
+}
