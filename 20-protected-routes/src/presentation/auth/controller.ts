@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { CustomError, RegisterUserDto } from "../../domain";
 import { AuthService } from "../services/auth.service";
-import { LoginUserDto } from "../../domain/dtos";
+import { CustomError, LoginUserDTO, RegisterUserDTO } from "../../domain";
 
 export class AuthController {
   constructor(public readonly authServices: AuthService) {}
@@ -17,7 +16,7 @@ export class AuthController {
   };
 
   register = (req: Request, res: Response) => {
-    const [error, registerDTO] = RegisterUserDto.create(req.body);
+    const [error, registerDTO] = RegisterUserDTO.create(req.body);
 
     if (error) return res.status(400).json(error);
 
@@ -28,7 +27,7 @@ export class AuthController {
   };
 
   login = (req: Request, res: Response) => {
-    const [error, loginDTO] = LoginUserDto.create(req.body);
+    const [error, loginDTO] = LoginUserDTO.create(req.body);
 
     if (error) return res.status(400).json(error);
 

@@ -17,16 +17,22 @@ Cada paso de su configuración ya se ha realizado previamente en el curso, por l
 
 <br/>
 
-- Puntualmente veremos:
+##### Temas puntuales de la sección
 
-  - Envío de correo
+- Esta es una sección cargada de mucha información útil que va desde relaciones en nuestros modelos hasta la paginación, puntualmente veremos:
 
-  - Creación de links de retorno
+  - Middlewares
 
-  - ngrok para tunneling
+  - Rutas
 
-  - Variables de entorno para facilitar sus cambios
+  - Modelos
 
-  - Pruebas de conexión y validación desde el celular
+  - Validación de token
 
-  - Pruebas hacia el localhost desde internet
+  - Query parameters
+
+  - Estrategias de paginación
+
+  - Manejo de errores
+
+  - Consideración sobre uso de servicios y inyección de dependencias.

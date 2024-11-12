@@ -1,13 +1,17 @@
 import { BcryptAdapter, envs, JwtAdapter } from "../../config";
 import { UserModal } from "../../data";
-import { CustomError, RegisterUserDto, UserEntity } from "../../domain";
-import { LoginUserDto } from "../../domain/dtos";
+import {
+  CustomError,
+  LoginUserDTO,
+  RegisterUserDTO,
+  UserEntity,
+} from "../../domain";
 import { EmailService } from "./email.service";
 
 export class AuthService {
   constructor(private readonly emailService: EmailService) {}
 
-  public async registerUser(registerUserDTO: RegisterUserDto) {
+  public async registerUser(registerUserDTO: RegisterUserDTO) {
     const existUser = await UserModal.findOne({ email: registerUserDTO.email });
 
     if (existUser) throw CustomError.badRequest("Email already exist");
@@ -37,7 +41,7 @@ export class AuthService {
     }
   }
 
-  public async loginUser(loginUserDTO: LoginUserDto) {
+  public async loginUser(loginUserDTO: LoginUserDTO) {
     const existUser = await UserModal.findOne({ email: loginUserDTO.email });
 
     if (!existUser)

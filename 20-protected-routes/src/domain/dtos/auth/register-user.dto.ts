@@ -1,13 +1,13 @@
 import { regularExps } from "../../../config";
 
-export class RegisterUserDto {
+export class RegisterUserDTO {
   constructor(
     public readonly name: string,
     public readonly email: string,
     public readonly password: string
   ) {}
 
-  static create(object: { [key: string]: any }): [string?, RegisterUserDto?] {
+  static create(object: { [key: string]: any }): [string?, RegisterUserDTO?] {
     const { name, email, password } = object;
 
     if (!name) return ["Missing name"];
@@ -16,6 +16,6 @@ export class RegisterUserDto {
     if (!password) return ["Missing password"];
     if (password.length < 6) return ["Password to short"];
 
-    return [undefined, new RegisterUserDto(name, email, password)];
+    return [undefined, new RegisterUserDTO(name, email, password)];
   }
 }
