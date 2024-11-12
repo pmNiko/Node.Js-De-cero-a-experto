@@ -15,7 +15,6 @@ outputs/
 
 keys/
 
-mongo/
 
 mongo-db/
 postgres-db/
