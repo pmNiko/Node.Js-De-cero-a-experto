@@ -20,14 +20,18 @@ Cada paso de su configuración ya se ha realizado previamente en el curso, por l
 
 ##### Temas puntuales de la sección
 
-- En esta sección aprenderemos a trabajar con relaciones en nuestras colecciones de Mongo y cómo podemos generar una semilla para poblar la base de datos rápidamente.
+- En esta sección trabajaremos con la carga y lectura de archivos a nuestro servidor, puntualmente veremos:
 
-- Puntualmente veremos:
+  - Carga Simple
 
-  - Una nueva forma de DTO completa
+  - Carga Multiple
 
-  - Validar MongoIDs
+  - Obtener archivos + Body de la petición http de forma simultánea
 
-  - Crear categorías, productos y usuarios desde una semilla
+  - Validaciones de archivo y extensiones
 
-  - Remover información en la serialización JSON
+  - Middlewares personalizados
+
+  - Almacenamiento en File System
+
+  - Obtención del archivo de la petición http
