@@ -1,4 +1,3 @@
-import { error } from "console";
 import { CategoryModel } from "../../data";
 import {
   CreateCategoryDTO,
