@@ -1,24 +1,55 @@
-import type{ UploadedFile } from "express-fileupload";
+import type { UploadedFile } from "express-fileupload";
+import fs from "fs";
+import path from "path";
+import { Uuid } from "../../config";
+import { CustomError } from "../../domain";
 
 export class FileUploadService {
-  constructor() {}
+  constructor(private readonly uuid = Uuid.v4) {}
 
-  private checkFolder() {
-    throw new Error("Not implemeted");
+  private checkFolder(folderPath: string) {
+    if (!fs.existsSync(folderPath)) {
+      fs.mkdirSync(folderPath);
+    }
   }
 
-  public uploadSingle(
+  public async uploadSingle(
     file: UploadedFile,
+    folder: string = "uploads",
+    validExtensions: string[] = ["png", "gif", "jpg", "jpeg"]
+  ) {
+    try {
+      const fileExtension = file.mimetype.split("/").at(1) ?? "";
+
+      if (!validExtensions.includes(fileExtension)) {
+        throw CustomError.badRequest(
+          `Invalid extension: ${fileExtension}, valid ones ${validExtensions}`
+        );
+      }
+
+      const destination = path.resolve(__dirname, "../../../", folder);
+      this.checkFolder(destination);
+
+      const fileName = `${this.uuid()}.${fileExtension}`;
+
+      file.mv(`${destination}/${fileName}`);
+
+      return { fileName };
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  public async uploadMultiple(
+    files: UploadedFile[],
     folder: string = "uploads",
     validExtensions: string[] = ["png", "pjg", "jpeg", "gif"]
   ) {
-    const fileextension = file.
-    
-  }
+    const fileNames = await Promise.all(
+      files.map((file) => this.uploadSingle(file, folder, validExtensions))
+    );
 
-  public uploadMultiple(
-    file: UploadedFile[],
-    folder: string = "uploads",
-    validExtensions: string[] = ["png", "pjg", "jpeg", "gif"]
-  ) {}
+    return fileNames;
+  }
 }

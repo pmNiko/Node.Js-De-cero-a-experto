@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { CustomError } from "../../domain";
+import { FileUploadService } from "../services";
 
 export class FileUploadController {
-  constructor() {}
+  constructor(private readonly fileUploadService: FileUploadService) {}
 
   private handlerError = (error: unknown, res: Response) => {
     if (error instanceof CustomError) {
@@ -15,12 +16,16 @@ export class FileUploadController {
   };
 
   public uploadFile = (req: Request, res: Response) => {
-    console.log({ files: req.files });
-
-    res.json("Upload File");
+    this.fileUploadService
+      .uploadSingle(req.body.files, `uploads/${req.params.type}`)
+      .then((uploaded) => res.json(uploaded))
+      .catch((err) => this.handlerError(err, res));
   };
 
   public fileMultipleUpload = async (req: Request, res: Response) => {
-    res.json("file Multiple Upload");
+    this.fileUploadService
+      .uploadMultiple(req.body.files, `uploads/${req.params.type}`)
+      .then((uploaded) => res.json(uploaded))
+      .catch((err) => this.handlerError(err, res));
   };
 }

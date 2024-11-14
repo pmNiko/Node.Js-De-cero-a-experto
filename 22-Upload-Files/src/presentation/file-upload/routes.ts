@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { AuthMiddleware } from "../middlewares/auth.middleware";
+import { FileUploadMiddleware, TypeMiddleware } from "../middlewares";
+import { FileUploadService } from "../services";
 import { FileUploadController } from "./controller";
 
 export class FileUploadRoutes {
@@ -7,7 +8,11 @@ export class FileUploadRoutes {
 
   static get routes(): Router {
     const router = Router();
-    const controller = new FileUploadController();
+    const fileUploadService = new FileUploadService();
+    const controller = new FileUploadController(fileUploadService);
+
+    router.use(FileUploadMiddleware.containFiles);
+    router.use(TypeMiddleware.validTypes(["users", "products", "categories"]));
 
     // api/upload/single/<user|category|product>/
     // api/upload/multiple/<user|category|product>/
