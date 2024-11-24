@@ -1,71 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Websockets Front</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Websockets - <small>Status</small></h1>
 
     <form>
-        <input type="text" placeholder="Enviar mensaje">
-        <button type="submit" >Enviar</button>
+      <input type="text" placeholder="Enviar mensaje" />
+      <button type="submit">Enviar</button>
     </form>
 
-    <ul id="messages" >
-        
-    </ul>
+    <ul id="messages"></ul>
 
     <script>
-        
-        const form = document.querySelector('form');
-        const input = document.querySelector('input');
-        const messages = document.querySelector('#messages');
-        const small = document.querySelector('small');
+      let socket = null;
 
-        function connectToServer() {
-            const socket = new WebSocket('ws://127.0.0.1:3000')            
-            
-            function sendMessage(message) {            
-                if (message.length <= 0) return;
-                form.reset();     
-                socket.send(message);
-            }
-    
-    
-            function renderMessage(message) {
-                const li = document.createElement('li');
-                li.innerHTML = message;
-                messages.prepend(li)
-            }
-    
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const message = input.value;
-                sendMessage(message)
-            });
-            
-            socket.onopen = (event) => {
-                small.innerHTML = 'Conectado';          
-            }
-            
-            socket.onclose = (event) => {
-               console.log('Disconected');   
-               small.innerHTML = 'Desnectado';    
-               
-               setTimeout(() => {
-                connectToServer();
-               }, 1500);
-            }
-    
-            socket.onmessage = (event) => {
-                const {payload} = JSON.parse(event.data)
-                renderMessage(payload)
-            }
-        }      
+      const form = document.querySelector("form");
+      const input = document.querySelector("input");
+      const messages = document.querySelector("#messages");
+      const small = document.querySelector("small");
 
-        connectToServer();
+      function sendMessage(message) {
+        if (message.length <= 0) return;
+        form.reset();
+        socket?.send(message);
+      }
+
+      function renderMessage(message) {
+        const li = document.createElement("li");
+        li.innerHTML = message;
+        messages.prepend(li);
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const message = input.value;
+        sendMessage(message);
+      });
+
+      function connectToServer() {
+        socket = new WebSocket("ws://127.0.0.1:3000");
+
+        socket.onopen = (event) => {
+          small.innerHTML = "Conectado";
+        };
+
+        socket.onclose = (event) => {
+          console.log("Disconected");
+          small.innerHTML = "Desnectado";
+
+          setTimeout(() => {
+            connectToServer();
+          }, 1500);
+        };
+
+        socket.onmessage = (event) => {
+          const { payload } = JSON.parse(event.data);
+          renderMessage(payload);
+        };
+      }
+
+      connectToServer();
     </script>
-</body>
+  </body>
 </html>
