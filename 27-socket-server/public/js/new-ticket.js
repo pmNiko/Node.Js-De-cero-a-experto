@@ -1,7 +1,7 @@
 const currentTicketLabel = document.querySelector("#lbl-new-ticket");
 const createTicketBtn = document.querySelector("button");
 
-const baseUrl = "http://localhost:3000/api/ticket";
+const baseUrl = "/api/ticket";
 
 async function getLastTicket() {
   try {
@@ -19,10 +19,14 @@ async function getLastTicket() {
   }
 }
 
+function setLastTickets(value) {
+  currentTicketLabel.innerHTML = `Tickets ${value}`;
+}
+
 async function loadLastTicket() {
   const numberOfTickets = await getLastTicket();
 
-  currentTicketLabel.innerHTML = `Tickets ${numberOfTickets}`;
+  setLastTickets(numberOfTickets);
 }
 
 async function createTicket() {
@@ -38,7 +42,7 @@ async function createTicket() {
 
     const newTicket = await resp.json();
 
-    currentTicketLabel.innerHTML = `Tickets ${newTicket.number}`;
+    setLastTickets(newTicket.number);
   } catch (error) {
     console.log(error);
   }
